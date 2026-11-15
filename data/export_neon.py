@@ -23,8 +23,8 @@ CELL_COLS = ["grid_x", "grid_y", "lon", "lat", "lon0", "lat0", "lon1", "lat1", "
 
 SQL_DAILY = """
 SELECT c.grid_x, c.grid_y, d.date, d.modis_count, d.modis_frp_sum, d.viirs_count, d.viirs_frp_sum
-FROM public.fire_daily d JOIN public.grid_cells c USING (cell_id)
-ORDER BY d.date, c.cell_id"""
+FROM public.fire_daily d JOIN public.grid_cells c USING (cell_id)"""
+# Pas de ORDER BY : build_db.py trie déjà, et trier 8,5 M de lignes coûterait du calcul Neon.
 
 
 def table(cols, rows):

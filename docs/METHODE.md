@@ -18,12 +18,12 @@ La zone (rectangle ou polygone dessiné) retient les cellules dont le **centre**
 
 ## 4. Normale et anomalies
 - L'année est découpée en **52 semaines** de 7 jours à partir du 1er janvier (la 52e absorbe les 8 ou 9 derniers jours). Une semaine n'est évaluée que si au moins 70 % de ses jours ont des données ; sa valeur est ramenée à 7 jours.
-- La **normale** d'une semaine est la moyenne de la même semaine dans **les autres années** (l'année évaluée est exclue). Il faut au moins 5 autres années.
+- La **normale** d'une semaine est la moyenne de la même semaine dans **les autres années** (l'année évaluée est exclue). Il faut au moins 4 autres années : la base couvre de janvier 2020 à août 2025, donc une semaine située après début août n'a que 4 autres années disponibles.
 - Niveau **élevé** : valeur supérieure au 75ᵉ centile des autres années, au moins 1,25 fois la normale, et au moins 10 détections. Niveau **critique** : supérieure au 90ᵉ centile, au moins 1,5 fois la normale, au moins 10 détections. Les seuils sont réglables dans l'application.
 - Une **période à surveiller** est un groupe de semaines **consécutives et de même niveau** : des semaines élevées côte à côte forment une période élevée, des semaines critiques côte à côte forment une période critique, et un changement de niveau ouvre une nouvelle période. Elles sont classées par niveau puis par excédent (observé moins normale).
 - La **fenêtre homologue** compare le total de la période choisie aux mêmes dates de chaque autre année.
 
-Limites : la normale est une moyenne sur la période disponible (pas de correction de tendance), et un seul indicateur (nombre de détections) est évalué, sans tenir compte de la météo ni de la végétation.
+Limites : la normale et les centiles reposent sur 4 ou 5 années seulement, ce qui rend les seuils de centile approximatifs ; la normale est une moyenne sur la période disponible (pas de correction de tendance), et un seul indicateur (nombre de détections) est évalué, sans tenir compte de la météo ni de la végétation.
 
 ## 5. Confirmation entre capteurs
 Chaque capteur est évalué séparément contre **son propre** historique, avec la même méthode. Une anomalie est **confirmée** quand au moins deux capteurs la signalent et que la moitié au moins des capteurs évaluables la signalent ; **isolée** quand un seul la signale ; **non vérifiable** quand moins de deux capteurs sont évaluables. Les capteurs d'une même famille (VIIRS) ne sont pas totalement indépendants : MODIS est le témoin le plus distinct.
