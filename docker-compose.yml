@@ -1,0 +1,9 @@
+# Lancement : docker compose up --build   puis ouvrir http://localhost:8000
+# Le fichier data/fireforce.duckdb doit exister (voir README : étape « Construire la base »).
+services:
+  fireforce:
+    build: .
+    ports: ["8000:8000"]
+    volumes:
+      - ./data:/data:ro
+    restart: unless-stopped

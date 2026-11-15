@@ -1,0 +1,16 @@
+data/*.duckdb
+data/synth*/
+data/npm/node_modules/
+shots/
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+.env.*
+!.env.example
+*.parquet
+neon_export/
+*.duckdb
+*.duckdb.wal
+.DS_Store
+node_modules/

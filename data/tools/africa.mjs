@@ -1,0 +1,11 @@
+import fs from "fs";
+import { feature } from "topojson-client";
+const topo = JSON.parse(fs.readFileSync("node_modules/world-atlas/countries-50m.json"));
+const fc = feature(topo, topo.objects.countries);
+const AFR = new Set(["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cameroon","Cape Verde","Central African Rep.","Chad","Comoros","Congo","Dem. Rep. Congo","Côte d'Ivoire","Djibouti","Egypt","Eq. Guinea","Eritrea","eSwatini","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Rwanda","S. Sudan","Senegal","Seychelles","Sierra Leone","Somalia","Somaliland","South Africa","Sudan","Tanzania","Togo","Tunisia","Uganda","W. Sahara","Zambia","Zimbabwe","São Tomé and Principe"]);
+const names = fc.features.map(f=>f.properties.name);
+const kept = fc.features.filter(f=>AFR.has(f.properties.name));
+console.error("kept", kept.length, "missing:", [...AFR].filter(n=>!names.includes(n)));
+const round = c => Array.isArray(c[0]) ? c.map(round) : [Math.round(c[0]*1000)/1000, Math.round(c[1]*1000)/1000];
+kept.forEach(f=>{ f.geometry.coordinates = round(f.geometry.coordinates); f.properties = {name:f.properties.name}; });
+fs.writeFileSync("../africa.geojson", JSON.stringify({type:"FeatureCollection", features:kept}));

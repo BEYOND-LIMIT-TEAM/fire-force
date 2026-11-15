@@ -1,0 +1,5 @@
+data/synth*
+data/npm
+shots
+**/__pycache__
+**/.pytest_cache
