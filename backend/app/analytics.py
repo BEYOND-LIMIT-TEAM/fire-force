@@ -30,7 +30,7 @@ class Params:
     ratio_eleve: float = 1.25
     ratio_critique: float = 1.5
     plancher: float = 10.0
-    min_annees: int = 5
+    min_annees: int = 4   # la base couvre 2020-2025 : 4 autres années au plus pour les semaines après août
     couverture_min: float = 0.7
 
 

@@ -43,7 +43,7 @@ class AnalyzeIn(BaseModel):
     ratio_eleve: float = Field(1.25, ge=1, le=10)
     ratio_critique: float = Field(1.5, ge=1, le=10)
     plancher: float = Field(10, ge=0, le=1e6)
-    min_annees: int = Field(5, ge=2, le=30)
+    min_annees: int = Field(4, ge=2, le=30)
 
 
 @app.get("/api/health")

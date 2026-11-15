@@ -13,5 +13,14 @@ run:
 
 demo: demo-data run
 
+# Données réelles : Neon (tables grid_cells et fire_daily) -> parquet -> base de l'application.
+# Lit NEON_DATABASE_URL (l'accès lecture seule fire_reader suffit). À lancer par UNE personne,
+# puis partager data/fireforce.duckdb (pas dans Git) : chaque export consomme du transfert Neon.
+neon-data:
+	$(PY) data/export_neon.py --sortie neon_export
+	$(PY) data/build_db.py --source VIIRS=neon_export/VIIRS.parquet --source MODIS=neon_export/MODIS.parquet \
+	  --reference VIIRS --secours MODIS --cellules neon_export/cells.parquet \
+	  --sortie data/fireforce.duckdb --jeu firms --remplacer
+
 test:
 	cd backend && $(PY) -m pytest -q tests

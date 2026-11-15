@@ -88,7 +88,20 @@ def test_periode_a_cheval_sur_deux_annees_reste_continue():
 DB = os.path.join(os.path.dirname(__file__), "..", "..", "data", "fireforce.duckdb")
 
 
-@pytest.mark.skipif(not os.path.exists(DB), reason="base de test absente")
+def _est_demo(path):
+    """Ces tests vérifient les épisodes plantés dans les données synthétiques (make demo-data)."""
+    if not os.path.exists(path):
+        return False
+    import duckdb
+    con = duckdb.connect(path, read_only=True)
+    try:
+        rows = con.execute("SELECT value FROM meta WHERE key = 'dataset'").fetchall()
+    finally:
+        con.close()
+    return bool(rows) and rows[0][0] == "demo"
+
+
+@pytest.mark.skipif(not _est_demo(DB), reason="base de démonstration absente (make demo-data)")
 class TestAPI:
     @classmethod
     def setup_class(cls):
