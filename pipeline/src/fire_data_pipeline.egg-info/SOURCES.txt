@@ -1,0 +1,12 @@
+pyproject.toml
+src/fire_data_pipeline.egg-info/PKG-INFO
+src/fire_data_pipeline.egg-info/SOURCES.txt
+src/fire_data_pipeline.egg-info/dependency_links.txt
+src/fire_data_pipeline.egg-info/top_level.txt
+src/fire_pipeline/__init__.py
+src/fire_pipeline/acquisition/__init__.py
+src/fire_pipeline/acquisition/download_sample.py
+src/fire_pipeline/normalization/__init__.py
+src/fire_pipeline/storage/__init__.py
+src/fire_pipeline/validation/__init__.py
+src/fire_pipeline/validation/create_manifest.py
