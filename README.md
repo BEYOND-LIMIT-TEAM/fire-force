@@ -17,6 +17,18 @@ Application web qui harmonise les détections de feux actifs MODIS et VIIRS (NAS
 
 L'utilisateur dessine une zone sur la carte (ou saisit des coordonnées, ou choisit une région), choisit une période, et obtient en moins de deux secondes : un verdict en une phrase, la carte des feux, le calendrier jour par jour, la comparaison semaine par semaine à la normale, la liste des périodes à surveiller, et la vérification croisée entre capteurs.
 
+## Pages et navigation
+
+| Adresse | Page |
+|---|---|
+| `/` | Page d'accueil cinématique (globe, séquence d'ouverture, accès à la plateforme) |
+| `/about` | Présentation du projet et de l'équipe |
+| `/app` | Le dashboard d'analyse (démarré seulement à la première visite) |
+
+Les trois adresses sont servies par le même backend : un rechargement direct fonctionne partout.
+Les textes de l'accueil et de About sont en anglais et en français dans `frontend/js/i18n.js`.
+Contours des continents : Natural Earth via world-atlas (`frontend/vendor/world-land.json`).
+
 ## Lancer en 3 commandes (données de démonstration)
 
 ```bash

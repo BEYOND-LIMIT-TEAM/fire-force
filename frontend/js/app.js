@@ -270,4 +270,7 @@ function readHash() {
   } catch { return null; }
 }
 
-boot();
+/* ---- intégration au routeur : démarrage différé, premier affichage de la vue ---- */
+let booted = null;
+export function start() { if (!booted) booted = boot(); return booted; }
+export function onShow() { try { if (S.map) S.map.map.invalidateSize(); resizeAll(); } catch (e) { /* vue pas encore prête */ } }

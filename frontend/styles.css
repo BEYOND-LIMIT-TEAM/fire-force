@@ -201,3 +201,78 @@ dialog::backdrop{background:rgba(8,14,20,.55)}
 
 .linkbtn{border:0;background:none;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font:inherit}
 .linkbtn:hover{filter:brightness(1.2)}
+
+/* =====================================================================
+   Identité NASA Space du dashboard : uniquement des variables et de l'habillage.
+   Aucune règle ci-dessous ne change la structure ni le comportement.
+   ===================================================================== */
+html:root[data-view="app"]{
+  color-scheme:dark;
+  --ground:#050B18; --panel:#101F35; --panel-2:#162B45; --ink:#F1F7FF; --ink-2:#94A9C2; --line:rgba(0,217,255,.17);
+  --accent:#00D9FF; --accent-ink:#031420; --accent-soft:rgba(0,217,255,.14);
+  --lvl-normal:#6F8AA8; --lvl-high:#FF9D2E; --lvl-crit:#FF4655;
+  --r0:#1B2B42; --r1:#FDE7E2; --r2:#F29A8E; --r3:#E04540; --r4:#B3142A;
+  --s1:#3488FF; --s2:#35D39A; --s3:#B58CFF; --s4:#FF9D2E;
+  --shadow:0 12px 40px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.04);
+}
+html[data-view="app"] body{
+  background:
+    radial-gradient(ellipse 70% 40% at 85% -5%,rgba(11,94,215,.28),transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%,rgba(0,217,255,.09),transparent 70%),
+    linear-gradient(rgba(0,217,255,.035) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,rgba(0,217,255,.035) 1px,transparent 1px) 0 0/44px 44px,
+    #050B18;
+  background-attachment:fixed;
+}
+html[data-view="app"] .top{background:rgba(7,16,32,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,217,255,.12),0 8px 30px rgba(0,0,0,.35)}
+html[data-view="app"] .brand{text-decoration:none;color:var(--ink)}
+html[data-view="app"] .brand .name{letter-spacing:.05em;text-transform:uppercase;font-weight:800;font-size:20px}
+html[data-view="app"] .flame{fill:#FF9D2E;filter:drop-shadow(0 0 7px rgba(255,157,46,.55))}
+html[data-view="app"] .btn{background:rgba(16,31,53,.7);border-color:var(--line);transition:border-color .15s,box-shadow .15s,background .15s}
+html[data-view="app"] .btn:hover{background:var(--panel-2);border-color:var(--accent);box-shadow:0 0 16px rgba(0,217,255,.2)}
+html[data-view="app"] a.btn{text-decoration:none;color:var(--ink)}
+html[data-view="app"] .btn.primary{background:linear-gradient(135deg,#0B5ED7,#0A9AD4 75%,#00BFE3);border-color:rgba(0,217,255,.7);color:#fff;letter-spacing:.04em;box-shadow:0 0 22px rgba(11,94,215,.45)}
+html[data-view="app"] .btn.primary:hover{box-shadow:0 0 30px rgba(0,217,255,.5);filter:none}
+html[data-view="app"] .btn.tool.on{background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 14px rgba(0,217,255,.25)}
+html[data-view="app"] .rail,html[data-view="app"] .card{
+  background:linear-gradient(180deg,rgba(22,43,69,.74),rgba(16,31,53,.86));border:1px solid var(--line);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);position:relative}
+html[data-view="app"] .rail{position:sticky}
+html[data-view="app"] .card::before{content:"";position:absolute;left:18px;right:18px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,217,255,.55),transparent);pointer-events:none}
+html[data-view="app"] h2,html[data-view="app"] legend{letter-spacing:.01em}
+html[data-view="app"] .verdict{border-left-width:4px;background:linear-gradient(135deg,rgba(22,43,69,.82),rgba(16,31,53,.9))}
+html[data-view="app"] .verdict[data-level="critique"]{box-shadow:var(--shadow),-14px 0 40px -18px rgba(255,70,85,.45)}
+html[data-view="app"] .verdict[data-level="eleve"]{box-shadow:var(--shadow),-14px 0 40px -18px rgba(255,157,46,.4)}
+html[data-view="app"] .kpi dd{text-shadow:0 0 18px rgba(0,217,255,.18)}
+html[data-view="app"] input[type=number],html[data-view="app"] input[type=date],html[data-view="app"] select{background:rgba(5,11,24,.55);border-color:var(--line)}
+html[data-view="app"] input:focus,html[data-view="app"] select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,217,255,.18);outline:none}
+html[data-view="app"] input[type=date]{color-scheme:dark}
+html[data-view="app"] .chip,html[data-view="app"] .chip-select{background:rgba(5,11,24,.45)}
+html[data-view="app"] .chip:hover{border-color:var(--accent)}
+html[data-view="app"] .zone-summary{background:rgba(5,11,24,.5);border:1px solid var(--line)}
+html[data-view="app"] #map{background:radial-gradient(ellipse at 50% 40%,#0B1E3A,#050B18);border-color:rgba(0,217,255,.26);box-shadow:inset 0 0 40px rgba(0,0,0,.5),0 0 0 1px rgba(0,217,255,.06)}
+html[data-view="app"] .leaflet-container{background:radial-gradient(ellipse at 50% 40%,#0B1E3A,#050B18)}
+html[data-view="app"] .leaflet-control-zoom a{background:rgba(16,31,53,.9);color:var(--ink);border-color:var(--line)}
+html[data-view="app"] .leaflet-control-zoom a:hover{background:var(--panel-2);color:var(--accent)}
+html[data-view="app"] .leaflet-control-attribution{background:rgba(5,11,24,.7)!important;color:var(--ink-2)!important}
+html[data-view="app"] .leaflet-control-attribution a{color:var(--accent)!important}
+html[data-view="app"] .ramp{box-shadow:0 0 12px rgba(224,69,64,.35)}
+html[data-view="app"] .map-tip{background:rgba(16,31,53,.96);color:var(--ink);border:1px solid var(--accent);box-shadow:0 0 18px rgba(0,217,255,.25)}
+html[data-view="app"] #map.osm-on .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.82) contrast(.92) saturate(.8)}
+html[data-view="app"] th{letter-spacing:.04em}
+html[data-view="app"] tr.ep:hover td,html[data-view="app"] tr.ep.on td{background:rgba(0,217,255,.07)}
+html[data-view="app"] .empty{background:rgba(5,11,24,.35)}
+html[data-view="app"] dialog{background:linear-gradient(180deg,#162B45,#101F35);border:1px solid rgba(0,217,255,.32);box-shadow:0 0 60px rgba(0,217,255,.18),0 30px 80px rgba(0,0,0,.6)}
+html[data-view="app"] dialog::backdrop{background:rgba(3,7,16,.72);backdrop-filter:blur(3px)}
+html[data-view="app"] .badge{background:rgba(5,11,24,.5)}
+html[data-view="app"] .skeleton{background:linear-gradient(90deg,rgba(22,43,69,.9),rgba(0,217,255,.12),rgba(22,43,69,.9));background-size:200% 100%}
+html[data-view="app"] ::selection{background:rgba(0,217,255,.35)}
+html[data-view="app"] ::-webkit-scrollbar{width:10px;height:10px}
+html[data-view="app"] ::-webkit-scrollbar-thumb{background:#21406a;border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+html[data-view="app"] ::-webkit-scrollbar-track{background:transparent}
+@media (max-width:1100px){html[data-view="app"] .rail{position:static}}
+@media print{
+  html:root[data-view="app"]{--ground:#fff;--panel:#fff;--panel-2:#F2F5F8;--ink:#0F1B27;--ink-2:#4A5B6B;--line:#CDD6DE;--accent:#0E6B73;--r0:#D9E0E7;--r1:#FDE7E2;--r2:#F29A8E;--r3:#D63A33;--r4:#7A0E16}
+  html[data-view="app"] body{background:#fff}
+  html[data-view="app"] .card,html[data-view="app"] .rail{background:#fff;backdrop-filter:none}
+}

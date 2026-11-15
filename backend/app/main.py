@@ -1,6 +1,8 @@
 """API Fire Force (FastAPI). Lance : uvicorn app.main:app --reload   (FIREFORCE_DB=chemin/fireforce.duckdb)"""
 import os
 import time
+import numpy as np
+import pandas as pd
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.gzip import GZipMiddleware
@@ -86,6 +88,23 @@ def map_totals(start: str, end: str):
     return {"values": [round(float(x), 1) for x in v], "start": start, "end": end}
 
 
+@app.get("/api/hotspots")
+def hotspots(n: int = 450):
+    """Quelques centaines de cellules parmi les plus actives des 12 derniers mois de données (page d'accueil)."""
+    n = max(10, min(n, 1500))
+    s = store()
+    end = pd.Timestamp(s.meta["last_day"]); start = (end - pd.Timedelta(days=364)).date().isoformat()
+    v = np.asarray(s.overview_map(start, str(end.date())), dtype=float)
+    top = np.argsort(v)[::-1][: n * 3]
+    top = top[v[top] > 0][::3]
+    if len(top) == 0:
+        return JSONResponse({"lon": [], "lat": [], "v": []})
+    c = s.cells
+    return JSONResponse({"lon": c["lon"].values[top].round(2).tolist(), "lat": c["lat"].values[top].round(2).tolist(),
+                         "v": (v[top] / v[top].max()).round(3).tolist(), "start": start, "end": str(end.date())},
+                        headers={"Cache-Control": "public, max-age=3600"})
+
+
 @app.post("/api/analyze")
 def do_analyze(body: AnalyzeIn):
     s = store()
@@ -105,5 +124,7 @@ if FRONT.exists():
     app.mount("/static", StaticFiles(directory=str(FRONT)), name="static")
 
     @app.get("/")
+    @app.get("/about")
+    @app.get("/app")
     def index():
         return FileResponse(FRONT / "index.html")
