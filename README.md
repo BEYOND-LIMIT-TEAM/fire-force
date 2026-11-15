@@ -38,7 +38,19 @@ python3 data/build_db.py \
   --sortie data/fireforce.duckdb --jeu firms --remplacer
 ```
 
-### Données hébergées sur Neon (PostgreSQL)
+### Données de l'application : celles de Neon (méthode officielle)
+
+Les données utilisées par l'application sont celles chargées dans Neon par le pipeline
+(`pipeline/`, tables `grid_cells` et `fire_daily`, janvier 2020 → août 2025, MODIS et VIIRS NOAA-20).
+Une seule personne construit la base, puis partage le fichier `data/fireforce.duckdb` (hors Git) :
+
+```bash
+export NEON_DATABASE_URL="postgresql://fire_reader:...@.../neondb?sslmode=require"
+make neon-data       # export Neon -> neon_export/*.parquet -> data/fireforce.duckdb
+make run
+```
+
+Détail des deux étapes :
 
 Si les données sont sur Neon (tables `grid_cells` et `fire_daily`), on les exporte une fois en parquet, puis on construit la base :
 
@@ -82,7 +94,7 @@ La base est interrogée **en SQL** (DuckDB) : la zone choisie sélectionne ses c
 ```json
 { "zone": {"type": "bbox", "bbox": [8.4, 1.6, 16.2, 13.1]},
   "start": "2024-08-04", "end": "2025-08-03",
-  "q_eleve": 75, "q_critique": 90, "ratio_eleve": 1.25, "ratio_critique": 1.5, "plancher": 10, "min_annees": 5 }
+  "q_eleve": 75, "q_critique": 90, "ratio_eleve": 1.25, "ratio_critique": 1.5, "plancher": 10, "min_annees": 4 }
 ```
 
 Zone polygone : `{"type": "polygon", "coordinates": [[lon, lat], ...]}`. La réponse contient `kpi`, `calendar` (jour, valeur, niveau de la semaine, confirmation), `weeks`, `episodes`, `same_window`, `seasonal`, `sensors`, `current`, `cell_map`, `zone`.
