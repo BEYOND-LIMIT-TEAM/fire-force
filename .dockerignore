@@ -3,3 +3,7 @@ data/npm
 shots
 **/__pycache__
 **/.pytest_cache
+data/*.duckdb
+neon_export
+.venv
+.git
